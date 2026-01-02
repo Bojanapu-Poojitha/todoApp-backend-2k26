@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Task } from "../type/Tasks";
-
+const tasks: Task[] = [];
 export const addItem = async (req: Request, res: Response) => {
   const newItem: Task = req.body;
 
@@ -15,5 +15,9 @@ export const addItem = async (req: Request, res: Response) => {
     priority: newItem.priority || "medium",
     deadline: newItem.deadline,
   };
+  tasks.push(task);
   return res.status(201).json({ message: "item added successfully", task });
+};
+export const getItems = async (req: Request, res: Response) => {
+  return res.status(200).json({ tasks });
 };
