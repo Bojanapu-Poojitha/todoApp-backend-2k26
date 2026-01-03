@@ -30,3 +30,18 @@ export const deleteItem = async(taskId:string):Promise<void>=>{
 
   await deleteId.delete();
 }
+
+export const updateTask = async(taskId:string,updateItem : Partial<Task>): Promise<Task>=>{
+
+  const updateId = tasksCollection.doc(taskId);
+  const existsOne = await updateId.get();
+  if(!existsOne){
+    throw new Error("The item is not found");
+  }
+  await updateId.update(updateItem);
+  return{
+    id:taskId,
+    ...updateItem,
+
+  }as Task;
+}
