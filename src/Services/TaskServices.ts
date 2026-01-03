@@ -24,3 +24,9 @@ export const getItems = async (): Promise<Task[]> => {
   result.forEach((task) => totalItems.push(task.data() as Task));
   return totalItems;
 };
+
+export const deleteItem = async(taskId:string):Promise<void>=>{
+  const deleteId = tasksCollection.doc(taskId);
+
+  await deleteId.delete();
+}
