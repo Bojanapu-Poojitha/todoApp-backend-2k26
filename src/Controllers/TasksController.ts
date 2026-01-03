@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Task } from "../type/Tasks";
-import { addNewItem,getItems } from "../Services/TaskServices";
+import { addNewItem,getItems, deleteItem } from "../Services/TaskServices";
 const tasks: Task[] = [];
 export const addItem = async (req: Request, res: Response) => {
   try {
@@ -20,4 +20,15 @@ export const getTask = async (req: Request, res: Response) => {
     res.status(500).json({ message: "failed to get items" });
   }
 };
+export const deleteTask = async(req:Request,res:Response)=>{
+  try{
+  const {id} = req.params;
+   await deleteItem(id);
+   res.status(200).json({message:"item is deleted successfully"});
+  }
+  catch(e){
+   res.status(500).json({message:'something went wrong'});
+  }
 
+
+}
