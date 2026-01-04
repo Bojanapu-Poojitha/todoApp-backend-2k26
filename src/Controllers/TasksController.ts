@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Task } from "../type/Tasks";
 import { addNewItem,getItems, deleteItem, updateTask } from "../Services/TaskServices";
-import { messaging } from "firebase-admin";
+import { tasksCollection } from "../Config/ToDoConfig";
 const tasks: Task[] = [];
 export const addItem = async (req: Request, res: Response) => {
   try {
@@ -13,6 +13,7 @@ export const addItem = async (req: Request, res: Response) => {
     res.status(500).json({ message: "failing" });
   }
 };
+
 export const getTask = async (req: Request, res: Response) => {
   try {
     const allItems = await getItems();
@@ -24,6 +25,12 @@ export const getTask = async (req: Request, res: Response) => {
 export const deleteTask = async(req:Request,res:Response)=>{
   try{
   const {id} = req.params;
+   console.log(`deleting task with ID: ${id}`);
+    const deleteId = tasksCollection.doc(id);
+      const existsId = await deleteId.get();
+       if (!existsId.exists) {
+      throw new Error('this id task not found');
+    }
    await deleteItem(id);
    res.status(200).json({message:"item is deleted successfully"});
   }
