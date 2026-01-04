@@ -13,7 +13,12 @@ export const addNewItem = async (newTask: Task): Promise<Task> => {
     deadline: newTask.deadline,
   });
   return {
-    ...newTask,
+     id: setItems.id, 
+    title: newTask.title,
+    description: newTask.description,
+    status: newTask.status,
+    priority: newTask.priority,
+    deadline: newTask.deadline,
   };
 };
 
@@ -27,7 +32,10 @@ export const getItems = async (): Promise<Task[]> => {
 
 export const deleteItem = async(taskId:string):Promise<void>=>{
   const deleteId = tasksCollection.doc(taskId);
-
+ const docSnapshot = await deleteId.get();
+   if (!docSnapshot.exists) {
+    throw new Error('Task not found');
+  }
   await deleteId.delete();
 }
 
