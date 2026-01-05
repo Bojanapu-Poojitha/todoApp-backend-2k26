@@ -1,7 +1,7 @@
 import express, { Request } from "express";
 import router from "./routes/TaskRouter";
 import cors from 'cors';
-const app = express();
+export const app = express();
 app.use(cors());
 const PORT = 3000;
 
