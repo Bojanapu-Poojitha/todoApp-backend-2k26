@@ -5,18 +5,16 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const servicePath = process.env.FIREBASE_SERVICE_ACCOUNT_PATH;
+const firebaseJson = process.env.FIREBASE_SERVICE_ACCOUNT_PATH;
 
-if (!servicePath) {
+if (!firebaseJson) {
   throw new Error("FIREBASE_SERVICE_ACCOUNT_PATH is not set");
 }
 
 // const serviceAccount = JSON.parse(
 //   fs.readFileSync(servicePath, "utf-8")
 // );
-const serviceAccount = JSON.parse(
-  process.env.FIREBASE_SERVICE_ACCOUNT_JSON as string
-);
+const serviceAccount = JSON.parse(firebaseJson);
 
 
 initializeApp({
