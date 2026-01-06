@@ -11,9 +11,13 @@ if (!servicePath) {
   throw new Error("FIREBASE_SERVICE_ACCOUNT_PATH is not set");
 }
 
+// const serviceAccount = JSON.parse(
+//   fs.readFileSync(servicePath, "utf-8")
+// );
 const serviceAccount = JSON.parse(
-  fs.readFileSync(servicePath, "utf-8")
+  process.env.FIREBASE_SERVICE_ACCOUNT_JSON as string
 );
+
 
 initializeApp({
   credential: cert(serviceAccount),
