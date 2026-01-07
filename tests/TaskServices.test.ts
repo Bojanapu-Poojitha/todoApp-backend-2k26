@@ -22,4 +22,12 @@ describe('service file test cases',()=>{
   expect(result.id).toBe("eds");
   expect(result.title).toBe("biryani");
 });
+
+test("deleteItem, to throw error an if task does not exist", async () => {
+  const mockTheGet = jest.fn().mockResolvedValue({ exists: false });
+  (tasksCollection.doc as jest.Mock).mockReturnValue({
+    get: mockTheGet,
+  });
+  await expect(deleteItem("notId")).rejects.toThrow("Task not found");
+});
 })
