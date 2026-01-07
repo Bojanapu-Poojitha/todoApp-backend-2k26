@@ -1,7 +1,16 @@
 # TODO-App Management 
 
-- Implement a basic ** ToDo-App ** with specific operations.
+- Implement a basic ** ToDo-App ** with specific operations.The user can `Add`, `Delete` and `Update` the items.
+- It can run on the server using `Express` with port number . 
 
+## Features :
+
+-Implemented a mainly four functionalities i.e :
+
+- Add a new items ,
+- Delete a particular item based on id ,
+- Update the item based on id,
+- And finally display all items
 
 ## Installation and set-up :
 
@@ -11,7 +20,7 @@
 
    ```bash
       
-       git clone https://github.com/Bojanapu-Poojitha/todoApp-backend-2k26.git
+     git clone https://github.com/Bojanapu-Poojitha/todoApp-backend-2k26.git
 
    ```
 
@@ -23,6 +32,7 @@
 
    ```bash
       npx tsc
+
       node dist/App.js
    ```
 
