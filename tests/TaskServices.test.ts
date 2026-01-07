@@ -30,4 +30,18 @@ test("deleteItem, to throw error an if task does not exist", async () => {
   });
   await expect(deleteItem("notId")).rejects.toThrow("Task not found");
 });
+
+test("getItems, to return all the tasks", async () => {
+  const mockTasks: { data: () => Task }[] = [
+    { data: () => ({ id: "1", title: "biryani", description: "food", status: "pending", priority: "high", deadline: "2026-01-01" }) },
+    { data: () => ({ id: "2", title: "lunch", description: "day", status: "pending", priority: "medium", deadline: "2026-01-02" }) },
+  ];
+  (tasksCollection.get as jest.Mock).mockResolvedValue({
+    forEach: (task: (taskDoc: { data: () => Task }) => void) =>
+      mockTasks.forEach(task),
+  });
+  const result = await getItems();
+  expect(result.length).toBe(2);
+  expect(result[0].title).toBe("biryani");
+});
 })
