@@ -1,5 +1,4 @@
 import { tasksCollection } from "../Config/ToDoConfig";
-import { db } from "../Config/ToDoConfig";
 import { Task } from "../type/Tasks";
 export const addNewItem = async (newTask: Task): Promise<Task> => {
   const setItems = tasksCollection.doc();
@@ -32,8 +31,8 @@ export const getItems = async (): Promise<Task[]> => {
 
 export const deleteItem = async(taskId:string):Promise<void>=>{
   const deleteId = tasksCollection.doc(taskId);
- const docSnapshot = await deleteId.get();
-   if (!docSnapshot.exists) {
+ const id = await deleteId.get();
+   if (!id.exists) {
     throw new Error('Task not found');
   }
   await deleteId.delete();
