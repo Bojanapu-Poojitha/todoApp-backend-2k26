@@ -6,7 +6,6 @@ import {
   deleteItem,
   updateTask,
 } from "../services/taskServices";
-import { tasksCollection } from "../config/toDoConfig";
 
 export const addItem = async (req: Request, res: Response) => {
   try {
@@ -42,12 +41,6 @@ export const getTask = async (req: Request, res: Response) => {
 export const deleteTask = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-
-    const deleteId = tasksCollection.doc(id);
-    const existsId = await deleteId.get();
-    if (!existsId.exists) {
-      throw new Error("this id task not found");
-    }
     await deleteItem(id);
     res.status(200).json({ message: "item is deleted successfully" });
   } catch (e) {
