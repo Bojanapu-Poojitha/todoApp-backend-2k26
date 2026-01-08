@@ -42,7 +42,7 @@ export const updateTask = async(taskId:string,updateItem : Partial<Task>): Promi
 
   const updateId = tasksCollection.doc(taskId);
   const existsOne = await updateId.get();
-  if(!existsOne){
+  if(!existsOne.exists){
     throw new Error("The item is not found");
   }
   await updateId.update(updateItem);
