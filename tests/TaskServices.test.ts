@@ -44,4 +44,30 @@ test("getItems, to return all the tasks", async () => {
   expect(result.length).toBe(2);
   expect(result[0].title).toBe("biryani");
 });
+
+test("updateTask, to update an existing task", async () => {
+  const mockUpdate = jest.fn();
+  const mockGet = jest.fn().mockResolvedValue({ exists: true });
+  (tasksCollection.doc as jest.Mock).mockReturnValue({
+    get: mockGet,
+    update: mockUpdate,
+  });
+  const updatedTask = { title: "dum-biryani" };
+  const result = await updateTask("1", updatedTask);
+  expect(mockUpdate).toHaveBeenCalledWith(updatedTask);
+  expect(result.title).toBe("dum-biryani");
+  expect(result.id).toBe("1");
+});
+
+test("deleteItem,to delete the task if it exists", async () => {
+  const mockDelete = jest.fn();
+  const mockGet = jest.fn().mockResolvedValue({ exists: true });
+  (tasksCollection.doc as jest.Mock).mockReturnValue({
+    get: mockGet,
+    delete: mockDelete,
+  });
+  await deleteItem("1");
+  expect(mockGet).toHaveBeenCalled();
+  expect(mockDelete).toHaveBeenCalled();
+});
 })
