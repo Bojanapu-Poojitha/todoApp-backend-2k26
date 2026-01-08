@@ -10,6 +10,18 @@ import { tasksCollection } from "../config/toDoConfig";
 
 export const addItem = async (req: Request, res: Response) => {
   try {
+   const {title,deadline} = req.body;
+     if (!title || typeof title !== "string") {
+      return res.status(400).json({
+        message: "title is required and it will be a string",
+      });
+    }
+
+    if (!deadline || typeof deadline !== "string") {
+      return res.status(400).json({
+        message: "deadline is required and it will be a string",
+      });
+    }
     const newTask: Task = req.body;
     const task = await addNewItem(newTask);
 
