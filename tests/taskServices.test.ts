@@ -1,6 +1,6 @@
 import { addNewItem ,deleteItem,getItems,updateTask} from "../src/Services/TaskServices";
 import { tasksCollection } from "../src/config/toDoConfig";
-import { Task } from "../src/type/Tasks";
+import { Task } from "../src/type/tasks";
 
 jest.mock("../src/Config/ToDoConfig");
 describe('service file test cases',()=>{
