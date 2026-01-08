@@ -30,7 +30,7 @@ export const getTask = async (req: Request, res: Response) => {
 export const deleteTask = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    console.log(`deleting task with ID: ${id}`);
+
     const deleteId = tasksCollection.doc(id);
     const existsId = await deleteId.get();
     if (!existsId.exists) {
