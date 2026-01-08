@@ -1,4 +1,4 @@
-import { tasksCollection } from "../Config/ToDoConfig";
+import { tasksCollection } from "../config/toDoConfig";
 import { Task } from "../type/Tasks";
 export const addNewItem = async (newTask: Task): Promise<Task> => {
   const setItems = tasksCollection.doc();
